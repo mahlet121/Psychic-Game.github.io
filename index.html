@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head><title> The Psychic game</title></head>
+<style>
+body{
+	background-color: orange;
+}
+p{
+	color:yellow;
+}
+
+</style>
+<body>
+
+	<div id="game">
+		
+		<p> Guess what letter I am thinking of</p>
+		<p> Wins: 0</p> 
+		<p> Loses: 0</p>
+		<p>Gueses left: 9</p>
+		<p>Your gueses so far: </p>
+
+	</div>
+	<script type="text/javascript" >
+		var wins=0;
+		var loses=0;
+		var guesesleft=9;
+		var guessofar=" ";
+		
+		document.onkeyup = function(){
+		var userguess = String.fromCharCode(event.keyCode).toLowerCase();
+		console.log(userguess);
+		
+		var computerguess = String.fromCharCode(97 + Math.floor(Math.random() * 26));
+		console.log(computerguess);
+		if (userguess==computerguess){
+			wins++;
+			alerts("Congratulation, you got it");
+			console.log(wins);
+			guesesleft--;
+			console.log(guesesleft);
+			guessofar=guessofar + userguess;
+			}
+		else {
+			loses++;
+			alert("You missed! Try again");
+			console.log(loses);
+			guesesleft--;
+			console.log(guesesleft);
+			guessofar=guessofar + userguess;
+			}
+
+	if ((guesesleft==0) && (wins==0)){
+		alert("Sorry, You loose! Game restarts");
+		document.location.reload(true);
+	 }
+	else if ((guesesleft==0) && (wins>0)){
+		alert("Game over, you scored " + wins);
+		document.location.reload(true);
+	 }
+	
+	else {
+	var html="<p>The Psychic game</P>" + "<p>Guess what letter I am thinking of </p>" +
+		"<p>Wins: " + wins + "</p>" +
+		"<p> Loses: " + loses +"</p>" +
+		"<p>Gueses left :" + guesesleft + "</p>" +
+		"<p> Your gueses so far: " + guessofar + "</p>";
+	document.querySelector('#game').innerHTML=html;
+}
+	}
+
+	</script>
+</body>
+</html>
+
